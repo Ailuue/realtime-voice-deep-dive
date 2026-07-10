@@ -1,0 +1,8 @@
+{
+    "typeCheckingMode": "basic",
+    "pythonVersion": "3.13",
+    "venvPath": ".",
+    "venv": ".venv",
+    "extraPaths": ["."],
+    "exclude": ["**/__pycache__", ".venv", "**/runs", "**/workspace"]
+}
