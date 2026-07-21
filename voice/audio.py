@@ -1,9 +1,8 @@
 """
-voice/audio.py — audio is a stream of frames, not a file.
-=========================================================
+voice/audio.py: audio is a stream of frames, not a file.
 
 The first mental shift for realtime voice: audio isn't a blob you upload and wait
-on — it's a **continuous stream of small frames** (typically 10–20 ms each) flowing
+on. It's a **continuous stream of small frames** (typically 10-20 ms each) flowing
 in both directions at once. You never have "the whole recording"; you have the
 frames so far. Everything else (turn detection, interruption, latency) follows from
 that.
@@ -51,6 +50,6 @@ def utterance(words: str, *, start_ms: int = 0, word_ms: int = 150, trailing_sil
 
 
 def merge(*streams: list[Frame]) -> list[Frame]:
-    """Merge several frame streams into one, sorted by time — e.g. to place a
+    """Merge several frame streams into one, sorted by time, e.g. to place a
     barge-in utterance partway through the conversation."""
     return sorted((f for s in streams for f in s), key=lambda f: f.t_ms)

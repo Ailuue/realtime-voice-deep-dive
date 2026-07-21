@@ -1,6 +1,5 @@
 """
-voice/stages.py — the two architectures, as latency-annotated stages.
-=====================================================================
+voice/stages.py: the two architectures, as latency-annotated stages.
 
 There are two ways to build a voice agent, and choosing between them is the central
 design decision of this dive:
@@ -13,8 +12,8 @@ mostly about **latency** (each hop adds delay) and **control** (the pipeline exp
 a text transcript you can log, moderate, and edit; speech-to-speech hides it). This
 file models each stage as a deterministic transform with a latency budget in
 milliseconds, so the examples can *add up* the delay and compare the two designs
-offline. The millisecond figures are teaching approximations — real numbers vary by
-model, network, and audio length — but the *shape* (more hops = more delay) is exact.
+offline. The millisecond figures are teaching approximations. Real numbers vary by
+model, network, and audio length, but the *shape* (more hops = more delay) is exact.
 """
 
 from __future__ import annotations
@@ -52,7 +51,7 @@ def respond(transcript: str) -> str:
     for key, reply in _REPLIES.items():
         if key in low:
             return reply
-    return "Sorry, I didn't catch that — could you say it another way?"
+    return "Sorry, I didn't catch that. Could you say it another way?"
 
 
 def speak_duration_ms(reply: str) -> int:

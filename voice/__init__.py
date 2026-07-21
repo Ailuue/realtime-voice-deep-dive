@@ -1,13 +1,13 @@
 """
-voice — a from-scratch, offline simulator for realtime voice agents.
+voice: a from-scratch, offline simulator for realtime voice agents.
 
 Realtime voice can't be shown honestly in a tiny offline example if it needs real
-mic/speaker I/O — so this repo simulates the *mechanics* deterministically:
+mic/speaker I/O, so this repo simulates the *mechanics* deterministically:
 
-  audio.py    — audio as a stream of timestamped frames (+ builders)
-  stages.py   — the two architectures as latency-annotated stages (pipeline vs S2S)
-  session.py  — the turn-taking state machine, with VAD turn detection + barge-in
-  providers.py— the (mock-only) provider shim, for parity with the series
+  audio.py     audio as a stream of timestamped frames (+ builders)
+  stages.py    the two architectures as latency-annotated stages (pipeline vs S2S)
+  session.py   the turn-taking state machine, with VAD turn detection + barge-in
+  providers.py the (mock-only) provider shim, for parity with the series
 
 Typical use:
 

@@ -1,6 +1,5 @@
 """
-voice/providers.py — this dive is an offline simulator.
-=======================================================
+voice/providers.py: this dive is an offline simulator.
 
 Unlike its sibling repos, this dive does not switch between OpenAI and Claude,
 because a genuine realtime voice session needs low-latency, full-duplex audio I/O
@@ -12,7 +11,7 @@ no key.
 
 What maps to production: the state machine (session.py), the two architectures
 (stages.py), and the barge-in/latency reasoning are all real. The transport is what
-the mock stands in for — in production you'd use the **OpenAI Realtime API**
+the mock stands in for. In production you'd use the **OpenAI Realtime API**
 (speech-to-speech over WebSocket/WebRTC) or an STT→LLM→TTS pipeline wired to
 streaming vendors. The README's "From teaching code to production" section maps
 each piece.
@@ -37,11 +36,11 @@ def describe() -> str:
 
 
 def ensure_ready() -> None:
-    """Never fails — this dive is a fully offline simulator. Present for parity
+    """Never fails; this dive is a fully offline simulator. Present for parity
     with the sibling repos' setup pattern."""
     p = provider_name()
     if p != "mock":
         print(
-            f"(note: PROVIDER={p!r} — this dive is an offline simulator and always runs "
+            f"(note: PROVIDER={p!r}; this dive is an offline simulator and always runs "
             f"on the mock. See the README for wiring a real Realtime API.)"
         )

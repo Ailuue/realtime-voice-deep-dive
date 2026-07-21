@@ -1,6 +1,5 @@
 """
-voice/session.py — the turn-taking state machine (with barge-in).
-==================================================================
+voice/session.py: the turn-taking state machine (with barge-in).
 
 A realtime voice agent is a small state machine over a full-duplex stream:
 
@@ -11,15 +10,15 @@ A realtime voice agent is a small state machine over a full-duplex stream:
 
 The two hard parts, both handled here:
 
-  1. Turn detection — deciding the user is *done* talking. We use a simple
+  1. Turn detection: deciding the user is *done* talking. We use a simple
      voice-activity rule: a run of silence longer than `vad_silence_ms` after
      speech ends the turn. (Real systems use a trained VAD / end-pointing model.)
-  2. Barge-in — the human interrupts while the agent is speaking. A good voice
+  2. Barge-in: the human interrupts while the agent is speaking. A good voice
      agent stops *immediately*, discards the rest of its planned audio, and starts
      listening. An agent that talks over the user feels broken.
 
 `RealtimeSession.run(frames)` consumes a merged input stream (see audio.merge) and
-returns a timeline of `Event`s with millisecond timestamps — deterministic, so you
+returns a timeline of `Event`s with millisecond timestamps, deterministic, so you
 can read the exact turn-taking and interruption behavior offline.
 """
 
@@ -49,7 +48,7 @@ class Event:
         if self.kind == "response_end":
             return f"{stamp} ✓  agent finished speaking"
         if self.kind == "interrupted":
-            return f"{stamp} ✋ BARGE-IN — {self.text}"
+            return f"{stamp} ✋ BARGE-IN: {self.text}"
         return f"{stamp} {self.kind} {self.text}"
 
 
@@ -109,7 +108,7 @@ class RealtimeSession:
             next_start = utterances[i + 1].start_ms if i + 1 < len(utterances) else None
 
             if next_start is not None and next_start <= resp_start:
-                # User spoke again before the agent produced any audio — the turn is
+                # User spoke again before the agent produced any audio, so the turn is
                 # superseded. A responsive agent abandons the planned reply.
                 events.append(Event(next_start, "interrupted",
                                     text="user spoke before the agent's audio started; planned reply dropped"))
