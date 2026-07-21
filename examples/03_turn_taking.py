@@ -1,12 +1,11 @@
 """
-Example 03 — the turn-taking state machine over a short dialogue.
-=================================================================
+Example 03: the turn-taking state machine over a short dialogue.
 
 A voice agent is a state machine over a full-duplex stream:
 
     LISTENING → (user stops) → THINKING → (first audio) → SPEAKING → (done) → LISTENING
 
-This runs a clean back-and-forth — three user turns, no interruptions — so you can
+This runs a clean back-and-forth, three user turns with no interruptions, so you can
 watch the machine cycle. Each turn: the VAD closes the user's speech, the agent
 thinks, speaks, and returns to listening before the next turn begins.
 
@@ -26,7 +25,7 @@ ensure_ready()
 print(f"Provider: {describe()}\n")
 
 # Three turns, spaced so each agent response finishes before the next turn starts
-# (no barge-in here — that's example 04).
+# (no barge-in here: that's example 04).
 dialogue = merge(
     utterance("hello there", start_ms=0),
     utterance("what is the weather today", start_ms=4000),
@@ -49,6 +48,6 @@ for e in RealtimeSession(mode="pipeline").run(dialogue):
 
 print(
     "\nOne clean cycle per turn: LISTENING → THINKING → SPEAKING → LISTENING. Real\n"
-    "conversations aren't this tidy — people interrupt, and the agent has to yield\n"
+    "conversations aren't this tidy. People interrupt, and the agent has to yield\n"
     "instantly. That's barge-in, next."
 )

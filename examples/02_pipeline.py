@@ -1,6 +1,5 @@
 """
-Example 02 — the STT → LLM → TTS pipeline, and its latency budget.
-==================================================================
+Example 02: the STT → LLM → TTS pipeline, and its latency budget.
 
 The first way to build a voice agent is a pipeline of three models in series:
 
@@ -12,7 +11,7 @@ For the pipeline that's STT + LLM + TTS, all in series.
 
 This runs one turn through the pipeline and prints the budget so you can see where
 the delay comes from. (Millisecond figures are teaching approximations in
-voice/stages.py; the shape — three hops add three delays — is exact.)
+voice/stages.py; the shape, three hops adding three delays, is exact.)
 
 Run it:
 
@@ -42,10 +41,10 @@ for e in RealtimeSession(mode="pipeline").run(utterance("what is the weather tod
     print("  " + e.line())
 
 print(
-    "\nA full second of dead air after the user stops is the pipeline's core problem —\n"
+    "\nA full second of dead air after the user stops is the pipeline's core problem.\n"
     "three models can't each be instant. Two things fight it: STREAMING every stage\n"
     "(start the LLM on partial transcript, start TTS on the first LLM tokens, so the\n"
     "stages overlap instead of stacking), and picking a single speech-to-speech model\n"
-    "instead (example 05–06). The pipeline's payoff is CONTROL — there's a text\n"
+    "instead (examples 05-06). The pipeline's payoff is CONTROL: there's a text\n"
     "transcript in the middle you can log, moderate, and edit."
 )

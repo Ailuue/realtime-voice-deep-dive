@@ -1,11 +1,10 @@
 """
-Example 05 — the latency budget: pipeline vs speech-to-speech.
-==============================================================
+Example 05: the latency budget: pipeline vs speech-to-speech.
 
 Latency is the make-or-break metric for voice. Humans notice a conversational gap
 past ~300–500 ms; much more and the agent feels sluggish or people start talking
-over it. So "time to first audio" — from the user stopping to the first sound back
-— is the number you engineer against.
+over it. So "time to first audio", from the user stopping to the first sound back,
+is the number you engineer against.
 
 This measures it both ways on the same turn: the three-hop pipeline vs a single
 speech-to-speech model. Same reply, very different delay, because the pipeline pays
@@ -48,7 +47,7 @@ print(
     f"The pipeline's {pipe}ms is three hops stacked; speech-to-speech collapses them\n"
     "into one, which is why it feels more natural in fast back-and-forth. But latency\n"
     "isn't the only axis (example 06): the pipeline gives you a text transcript in the\n"
-    "middle to log, moderate, and edit — speech-to-speech hides it. And you can shrink\n"
+    "middle to log, moderate, and edit; speech-to-speech hides it. And you can shrink\n"
     "the pipeline's gap a lot by STREAMING each stage so they overlap instead of\n"
     "stacking. Engineer against the number your users feel, not the one on a spec sheet."
 )
